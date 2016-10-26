@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Quizz - Istoria României</title>
+	<!--[if lt IE 9]>
+	    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+	<![endif]-->
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&subset=latin-ext" rel="stylesheet">
+	<link href="css/reset.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+	<section class="quizz-container">
+		<header>
+			<h1 class="quizz-title">Quizz <span>Istoria României</span></h1>
+		</header>
+		<div class="quizz-content" id="quizzContent">
+			<form method="GET" name="quizz">
+			<div class="feat-photo-container"><div class="feat-photo" id="featPhoto"></div></div>
+			<h2><span class="questions-progress" id="questionProgress"><span id="cQ"></span> / <span id="qN"></span></span><span id="question"></span></h2>
+				<div class="answers" id="answers"></div>
+				<div class="buttons-container" id="buttonsContainer">
+					<button type="submit" id="next">Înainte</button>
+					<div class="error-container" id="errorContainer"></div>
+				</div>
+			</form>
+		</div>
+	</section>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/quizz_logic.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+[
+	{"img": "img/geti.jpg", "question": "Cum îi numeau grecii pe daci?", "choices": ["daci", "traci", "geți", "buri", "carpi"], "correctAnswer": 2},
+	{"img": "img/daco-romani.jpg", "question": "În războaiele daco-romane din anii 101-102, romanii au fost conduși de către:", "choices": ["Burebista", "Traian", "Decebal", "Lisimah", "Alexandru cel Mare"], "correctAnswer": 1},
+	{"img": "img/glad-gelu-menumorut.jpg", "question": "Ungurii, în drumul lor spre Câmpia Panoniei, i-au găsit în Transilvania pe:", "choices": ["slavi", "gepizi", "români", "goți"], "correctAnswer": 2},
+	{"img": "img/tara-romaneasca.jpg", "question": "Cine este considerat fondatorul Țării Românești?", "choices": ["Harap Alb", "Negru Vodă", "Neagu Djuvara", "Lucian Boia"], "correctAnswer": 1},
+	{"img": "img/alexandru-cel-bun.jpg", "question": "Cine este bunicul lui Ștefan cel Mare?", "choices": ["Mircea cel Bătrân", "Iancu de Hunedoara", "Alexandru cel Bun", "Bogdan I"], "correctAnswer": 2},
+	{"img": "img/stefan_cel_mare.jpg", "question": "În ce perioadă a domnit Ștefan cel Mare?", "choices": ["1347 - 1356", "1457 - 1504", "1404 - 1433"], "correctAnswer": 1},
+	{"img": "img/neagoe-basarab.jpg", "question": "Învățăturile lui Neagoe Basarab îi erau adresate lui:", "choices": ["Sava", "Teodosie", "Teofil"], "correctAnswer": 1},
+	{"img": "img/vlad_tepes.jpg", "question": "În noaptea zilei de 17 iunie 1462, Vlad Țepeș s-a luptat cu:", "choices": ["Baiazid", "Soliman Pașa", "Suleiman Magnificul", "Mahomed al II-lea"], "correctAnswer": 3},
+	{"img": "img/mihai_viteazu.jpg", "question": "În ce an a avut loc unirea înfăptuită de Mihai Viteazul?", "choices": ["1918", "1456", "1688", "1600", "1859"], "correctAnswer": 3},
+	{"img": "img/constantin-brancoveanu.jpg", "question": "Constantin Brâncoveanu a construit mănăstirea:", "choices": ["Putna", "Hurezi", "Cozia", "Antim", "Curtea de Argeș"], "correctAnswer": 1}
+]
