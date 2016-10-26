@@ -71,7 +71,7 @@ h1 {
 
 	.feat-photo {
 		padding-bottom: 115.15151515151515151515151515152%;
-		// background-image: url(../img/stefan_cel_mare.jpg);
+/*		background-image: url(../img/stefan_cel_mare.jpg);*/
 		background-repeat: no-repeat;
 		background-size: cover;
 		border-radius: 4px;
@@ -103,6 +103,10 @@ h1 {
 .buttons-container {
 	padding: 1.875rem;
 	position: relative;
+}
+
+.error-container {
+	display: none;
 }
 
 .error-container p {

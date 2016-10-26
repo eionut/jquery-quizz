@@ -1,43 +1,29 @@
-// load questions
-function loadQuestions() {
-	var questions,
-		dataUrl = "js/questions.json",
-		xhr = new XMLHttpRequest();
-	
-	xhr.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			questions = JSON.parse(this.responseText);
-		}
-		if (questions) {
-			playQuizz(questions);
-		}
-	};
-	
-	xhr.open("GET", dataUrl, true);
-	xhr.send();
-
-}
+$.ajax({
+	method: "GET",
+	url: "js/questions.json",
+	dataType: "json",
+	success: function(msg) {
+		console.log(msg);
+		var questions = msg;
+		playQuizz(questions);
+	}
+});
 
 function playQuizz(quizzQuestions) {
-	var featPhoto = document.getElementById("featPhoto"), // Store location for feat-photo element
-		currentQuestion = document.getElementById("cQ"), // Store location for current question indicator element 
-		questionsNumber = document.getElementById("qN"), // Store location for questions number indicator element
-		questionElement = document.getElementById("question"), // Store location for question container element
-		answers = document.getElementById("answers"), // Store location for answers container
-		errorContainer = document.getElementById("errorContainer"), // Store location of error container
-		buttonsContainer = document.getElementById("buttonsContainer"),
-		submitButton = document.getElementById("next"), // Store location for submit button
+	var $featPhoto = $("#featPhoto"), // Store location for feat-photo element
+		$currentQuestion = $("#cQ"), // Store location for current question indicator element 
+		$questionsNumber = $("#qN"), // Store location for questions number indicator element
+		$questionElement = $("#question"), // Store location for question container element
+		$answers = $("#answers"), // Store location for answers container
+		$errorContainer = $("#errorContainer"), // Store location of error container
+		$buttonsContainer = $("#buttonsContainer"),
+		$submitButton = $("#next"), // Store location for submit button
 		questionNo = 0, // Set initial question to 0;
 		userAnswers = [], // store user answers in an array
 		correctAnswers = 0; // Set correct answers to 0
 
-	var backButton = document.createElement("button");
-	var backText = document.createTextNode("Inapoi");
-	backButton.appendChild(backText);
-	backButton.setAttribute('id','prev');
-
 	// write questions number
-	questionsNumber.textContent = quizzQuestions.length;
+	$questionsNumber.text(quizzQuestions.length);
 
 	// add answers
 	function insertAnswers(qNo) {
@@ -51,15 +37,15 @@ function playQuizz(quizzQuestions) {
 
 	// populate quizz
 	function populateQuizz() {
-
+		
 		var url = "url(" + quizzQuestions[questionNo].img + ")"; // store the url for feat-photo
-		featPhoto.style.backgroundImage = url; // set the url for feat-photo
+		$featPhoto.css("background-image", url); // set the url for feat-photo
 
-		currentQuestion.textContent = questionNo + 1; // upgrade question number indicator
+		$currentQuestion.text(questionNo + 1); // upgrade question number indicator
 
-		questionElement.textContent = quizzQuestions[questionNo].question; // insert current question
+		$questionElement.text(quizzQuestions[questionNo].question); // insert current question
 
-		answers.innerHTML = insertAnswers(questionNo); // insert answers
+		$answers.fadeIn().html(insertAnswers(questionNo)); // insert answers
 
 		questionNo += 1; // upgrade question number
 		if (questionNo >= 2) {
@@ -71,13 +57,15 @@ function playQuizz(quizzQuestions) {
 	}
 
 	function insertBackBtn() {
-		buttonsContainer.insertBefore(backButton, submitButton);
+		if (!$("#prev").length) {
+			$submitButton.before('<button id="prev">Inapoi</button>');	
+		}
 	}
 
 	function goBack() {
 		if (questionNo === 2) {
 			questionNo = 0;
-			buttonsContainer.removeChild(backButton);
+			$("#prev").remove();
 		} else {
 			questionNo -= 2;	
 		}
@@ -148,37 +136,45 @@ function playQuizz(quizzQuestions) {
 	populateQuizz();
 
 	// Add an event listener on the button
-	submitButton.addEventListener('click', function(e) {
+	$submitButton.on('click', function(e) {
 		e.preventDefault();
 
-		errorContainer.innerHTML = ""; // delete error message
+		if (!$('#errorContainer').is(":hidden")) {
+			$errorContainer.hide(); // delete error message
+		}
 
 		if (!ifAnswer()) { // check if the user submited an answer before clicking the button
-			errorContainer.innerHTML = "<p>Selectează un răspuns!</p>";
+			$errorContainer.fadeIn();
 		} else {
-			errorContainer.innerHTML = "";
+			$errorContainer.fadeOut();
 			if (questionNo == quizzQuestions.length) { // check if last question
 				getUserAnswer();
 				console.log(userAnswers);
 				verifyAnswers();
-				document.getElementById("quizzContent").innerHTML = '<div class="message-container">' + generateMessage(correctAnswers) + '</div>';
+				$("#quizzContent").fadeOut(500, function() {
+					$("#quizzContent").fadeIn().html('<div class="message-container">' + generateMessage(correctAnswers) + '</div>');
+				});
 			} else {
 				getUserAnswer();
-				populateQuizz();
+				$('.question-container').fadeOut(500, function() {
+					populateQuizz();
+					$('.question-container').fadeIn();
+				});
 			}
 		}
 	});
 
-	backButton.addEventListener('click', function(e) {
+	$('#buttonsContainer').on('click', '#prev', function(e) {
 		e.preventDefault();
-		if (errorContainer.innerHTML) {
-			errorContainer.innerHTML = "";
+		if (!$('#errorContainer').is(":hidden")) {
+			$errorContainer.hide(); // delete error message
 		}
 		getUserAnswer();
-		goBack();
-	})
+		$('.question-container').fadeOut(500, function() {
+			goBack();
+			$('.question-container').fadeIn();
+		});
+	});
 }
-
-loadQuestions();
 
 
